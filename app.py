@@ -24,7 +24,6 @@ query_params = {'query': '(3DArt OR b3d OR blender3D) -lewd -nsfw -2d -giveaway 
 
 def bearer_oauth(r):
     #Method required by bearer token authentication.
-
     r.headers["Authorization"] = f"Bearer {bearer_token}"
     r.headers["User-Agent"] = "v2RecentSearchPython"
     return r
@@ -107,7 +106,7 @@ def like_and_retweet():
                 "https://api.twitter.com/2/users/{}/likes".format(config.id), json=payload
             )
             
-            #Exit of a 429
+            #Exit if a 429
             if response.status_code == 429:
                 print("429: Cooldown Required")
                 break
@@ -123,9 +122,9 @@ def like_and_retweet():
                 "https://api.twitter.com/2/users/by", params=handle
             )
 
-            id_json_response = response.json()
+            json_response = response.json()
             try:
-                follow_id = {"target_user_id": id_json_response['data'][0].get('id')}
+                follow_id = {"target_user_id": json_response['data'][0].get('id')}
             except:
                 continue
 
