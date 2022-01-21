@@ -20,7 +20,7 @@ consumer_secret = config.API_KEY_SECRET
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
 #Query
-query_params = {'query': '(3DArt OR b3d OR blender3D) -lewd -nsfw -2d -giveaway -drop -nft -nfts -xxx -porn -adult -nftcollector -tezos -btc -eth has:media has:hashtags', 'max_results': 35}
+query_params = {'query': '(3DArt OR b3d OR blender3D) -2d -giveaway -drop -nft -nfts -nftcollector -tezos -btc -eth has:media has:hashtags', 'max_results': 35}
 
 def bearer_oauth(r):
     #Method required by bearer token authentication.
