@@ -8,11 +8,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from apscheduler.schedulers.blocking import BlockingScheduler
 from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
-chrome_options.add_argument("--headless")
+#chrome_options.add_argument("--headless")
 bearer_token = config.BEARER_TOKEN
 consumer_key = config.API_KEY
 consumer_secret = config.API_KEY_SECRET
@@ -54,7 +53,6 @@ def authorize():
     authorization_url = oauth.authorization_url(base_authorization_url)
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     driver.get(authorization_url)
-    driver.maximize_window()
     sleep(3)
 
     #enter username
@@ -140,16 +138,9 @@ def like_and_retweet():
                 raise Exception(
                     "Request returned an error: {} {}".format(response.status_code, response.text)
                 )
-    main()
-
-def job():
-    like_and_retweet()
 
 def main():
-    print("start")
-    scheduler = BlockingScheduler()
-    scheduler.add_job(job, 'interval', hours=1)
-    scheduler.start()
+    like_and_retweet()
 
 if __name__ == "__main__":
     main()
